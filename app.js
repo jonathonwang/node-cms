@@ -61,7 +61,6 @@ const routesRegistrationHelper = (routes) => {
     } else {
       app.use('/' + route, routes[route].router);
     }
-    console.log(route);
   }
 }
 routesRegistrationHelper(routes);
