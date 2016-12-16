@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "nodemon": "nodemon -e hbs,js,jade,json,tsx,ts"
   },
   "dependencies": {
     "@types/bootstrap": "^3.3.32",

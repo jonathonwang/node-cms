@@ -9,9 +9,19 @@
       {{/if}}
     </title>
     <link rel="shortcut icon" href="/images/node-favicon.ico">
-    <link rel='stylesheet' href='/css/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/app.css" />
   </head>
   <body>
+
+    {{!-- Navbar Partial --}}
+    {{>navbar}}
+    {{!-- /Navbar Partial --}}
+
     {{{body}}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="/js/app.js" charset="utf-8"></script>
   </body>
 </html>

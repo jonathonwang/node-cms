@@ -13,7 +13,6 @@ const registerHandlebarsPartials = (partialsDirectories) => {
           }
           const name = matches[1];
           const template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
-          console.log(template);
           hbs.registerPartial(name, template);
         }
       }
