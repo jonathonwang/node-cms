@@ -54,16 +54,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // =============================================================================
 // Setup App to Use Routes
-// const routesRegistrationHelper = (routes) => {
-//   for(let route of routes) {
-//     console.log(route[0]);
-//     app.use(route[0], route[1]);
-//   }
-// }
-// routesRegistrationHelper(routes);
 const routesRegistrationHelper = (routes) => {
   for(let route in routes) {
-    app.use(routes[route].url, routes[route].router);
+    if(route === 'home'){
+      app.use('/', routes[route].router);
+    } else {
+      app.use('/' + route, routes[route].router);
+    }
+    console.log(route);
   }
 }
 routesRegistrationHelper(routes);
