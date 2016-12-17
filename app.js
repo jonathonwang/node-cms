@@ -3,9 +3,9 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+const session = require('express-session')
 const bodyParser = require('body-parser');
 const colors = require('colors');
-
 // Mongoose MongoDB Connection Helper
 const mongooseConnection = require('./db');
 
@@ -17,10 +17,12 @@ const routes = require('./routes/index');
 // const users = require('./routes/users');
 
 const app = express();
+// Setup for Session Cookies
+app.use(session({secret: 'YiYtX2DLjRJ.6vT6m7sf2+DqRbZB(+jHbbsG', cookie: {}}));
 
 // =============================================================================
 // Setup MongoDB Connection with Mongoose
-mongooseConnection('mongodb://localhost:27017');
+mongooseConnection('mongodb://localhost:27017/node_cms');
 // =============================================================================
 
 

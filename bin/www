@@ -7,7 +7,6 @@
 const app = require('../app');
 const debug = require('debug')('node-cms:server');
 const http = require('http');
-
 /**
  * Get port from environment and store in Express.
  */

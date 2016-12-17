@@ -9,7 +9,6 @@
       {{/if}}
     </title>
     <link rel="shortcut icon" href="/images/node-favicon.ico">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/app.css" />
   </head>
   <body>
@@ -17,6 +16,15 @@
     {{!-- Navbar Partial --}}
     {{>navbar}}
     {{!-- /Navbar Partial --}}
+
+    {{!-- If there is an error --}}
+    {{#if error}}
+      {{>error-collapse error=error}}
+    {{/if}}
+    {{#if success}}
+      {{>success-collapse success=success}}
+    {{/if}}
+    {{!-- /Error Partial --}}
 
     {{{body}}}
 

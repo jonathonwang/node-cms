@@ -3,6 +3,20 @@
     <div class="col-xs-12">
       <h1>{{title}}</h1>
       <p>Welcome to {{title}}</p>
+
+      {{#each posts}}
+      <div class="col-xs-4">
+        <ul>
+          <strong>ID:</strong> {{this._id}}<br>
+          <strong>TITLE:</strong> {{this.title}}<br>
+          <strong>CREATED AT:</strong>{{this.created_at}}<br>
+          <strong>UPDATED AT:</strong>{{this.updated_at}}<br>
+          <br>
+          <br>
+        </ul>
+      </div>
+      {{/each}}
+
     </div>
   </div>
 </div>

@@ -1,0 +1,16 @@
+label {
+  font-family: $base-font-family;
+  font-weight: 400;
+  position: relative;
+  &.required {
+    &:after {
+      content: '*';
+      position: absolute;
+      right: -13px;
+      top: 0;
+      display: block;
+      width: 10px;
+      height: 10px;
+    }
+  }
+}
