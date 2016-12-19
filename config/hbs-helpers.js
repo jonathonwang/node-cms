@@ -1,6 +1,7 @@
 const hbs = require('hbs');
 const fs = require('fs');
 
+// Register all hbs partials in given directories
 const registerHandlebarsPartials = (partialsDirectories) => {
   if(partialsDirectories.length > 0){
     for(const partialsDir of partialsDirectories){
@@ -18,6 +19,18 @@ const registerHandlebarsPartials = (partialsDirectories) => {
       }
     }
   }
-}
+};
 
-module.exports = registerHandlebarsPartials;
+// =============================================================================
+const registerHandlebarsHelpers = () => {
+  // Used for Debugging - spits out json
+  hbs.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+  });
+};
+// =============================================================================
+
+module.exports = {
+  registerHandlebarsPartials,
+  registerHandlebarsHelpers
+}
