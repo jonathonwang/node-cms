@@ -6,5 +6,4 @@ const baseUrl = '/';
 router.get(baseUrl, (req, res, next) => {
   res.render('index', { home: true, title: 'asd' });
 });
-
 module.exports = { router };

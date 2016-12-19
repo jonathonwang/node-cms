@@ -5845,4 +5845,21 @@ label {
     width: 10px;
     height: 10px; }
 
+.admin-navbar.navbar {
+  background-color: #000;
+  border-radius: 0;
+  border-color: transparent;
+  min-height: 20px;
+  margin-bottom: 0;
+  height: 33px; }
+  .admin-navbar.navbar .navbar-brand {
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px; }
+  .admin-navbar.navbar .navbar-nav li {
+    font-size: 14px; }
+    .admin-navbar.navbar .navbar-nav li a {
+      padding-top: 5px;
+      padding-bottom: 5px; }
+
 /*# sourceMappingURL=app.css.map*/

@@ -9,7 +9,6 @@ const User = require('../app/index.js').User;
 // GET home page
 const baseUrl = '/';
 router.get(baseUrl, (req, res, next) => {
-  console.log(req.query);
   if(req.query.logout) {
     res.render('login', {
       title: 'Login',
@@ -47,12 +46,11 @@ const attemptUserLogin = (req, res) => {
 const attemptUserAuth = (req, res, email, suppliedPassword, User) => {
   // Find the User by Email
   User.findOne({ email }, (err, FoundUser) => {
-    console.log(FoundUser);
     if(!err && FoundUser) {
       // User Found User Password Hash to compare to Supplied Password
       bcrypt.compare(suppliedPassword, FoundUser.password, (err, isMatch) => {
         if (isMatch){
-          loginSuccess(req, res, 'User Logged In', FoundUser._id);
+          loginSuccess(req, res, 'User Logged In', FoundUser);
         } else {
           loginFailed(res, 'Username And Password Doesnt Match');
         }
@@ -70,11 +68,11 @@ const loginFailed = (res, errorMessage) => {
   });
 }
 // Login Success Function =====
-const loginSuccess = (req, res, successMessage, FoundUserId) => {
-  req.session.user_id = FoundUserId;
+const loginSuccess = (req, res, successMessage, FoundUser) => {
+  req.session.user_id = FoundUser._id;
   res.render('login', {
     title: 'Login',
-    success: { message: 'User Logged In' }
+    success: { message: successMessage }
   });
 }
 // End Login Post Route Functions

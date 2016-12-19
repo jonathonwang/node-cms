@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
-// =============================================================================
-// ROUTES
-// GET Logout page '/logout'
+const User = require('../app/index').User;
+
+/* GET Register page. */
 const baseUrl = '/';
 router.get(baseUrl, (req, res, next) => {
-  delete req.session.user_id;
-  res.redirect('/login?logout=true');
+  res.render('admin', { title: 'Admin' })
 });
 
 // Must export array with '/route' and router

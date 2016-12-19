@@ -1,39 +1,51 @@
+const env = require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
-const session = require('express-session')
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const bodyParser = require('body-parser');
 const colors = require('colors');
-// Mongoose MongoDB Connection Helper
-const mongooseConnection = require('./db');
+const mongoose = require('mongoose');
 
 // Helper to register Handlebars Partials
 const registerHandlebarsPartials = require('./helpers');
 
 // Routes
 const routes = require('./routes/index');
-// const users = require('./routes/users');
+
+// Authentication Middleware
+const isUserAuth = require('./middleware/index').isUserAuth;
 
 const app = express();
-// Setup for Session Cookies
-app.use(session({secret: 'YiYtX2DLjRJ.6vT6m7sf2+DqRbZB(+jHbbsG', cookie: {}}));
 
 // =============================================================================
 // Setup MongoDB Connection with Mongoose
-mongooseConnection('mongodb://localhost:27017/node_cms');
+// mongooseConnection('mongodb://localhost:27017/node_cms');
+mongoose.connect(env.DB_HOST);
+const db = mongoose.connection;
+// On Connection Error
+db.on('error', () => {
+  console.log('MongoDB Connection Failed'.red.bold)
+});
+// On Connection Success
+db.once('open', () => {
+  console.log('MongoDB Connection Successful'.green.bold)
+});
 // =============================================================================
 
+// Setup for Session Cookies
+app.use(session({
+  secret: env.SESSION_SECRET,
+  name: env.SESSION_NAME,
+  cookie: {},
+  store: new MongoStore({ mongooseConnection: db }),
+  resave: true,
+  saveUninitialized: true
+}));
 
-// =============================================================================
-// Register Handlebars Partials
-const partialsDirectories = [
-  __dirname + '/views/partials'
-];
-
-registerHandlebarsPartials(partialsDirectories);
-// =============================================================================
 
 
 // view engine setup
@@ -53,6 +65,9 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// User Auth Middleware
+app.use((req, res, next) => isUserAuth(req, res, next));
 
 // =============================================================================
 // Setup App to Use Routes
@@ -98,6 +113,22 @@ app.use((err, req, res, next) => {
     error: {}
   });
 });
+
+
+// =============================================================================
+// Register Handlebars Partials
+const partialsDirectories = [
+  __dirname + '/views/partials'
+];
+
+registerHandlebarsPartials(partialsDirectories);
+// =============================================================================
+// Should be imported later -- used for debugging
+const hbs = require('hbs');
+hbs.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+});
+// =============================================================================
 
 
 module.exports = app;

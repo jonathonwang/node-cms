@@ -13,9 +13,12 @@
   </head>
   <body>
 
+    {{#if user}}
+      {{>admin-bar user=user}}
+    {{/if}}
+
     {{!-- Navbar Partial --}}
-    {{>navbar}}
-    {{!-- /Navbar Partial --}}
+    {{>navbar user=user}}
 
     {{!-- If there is an error --}}
     {{#if error}}

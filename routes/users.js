@@ -7,7 +7,11 @@ const User = require('../app/index').User;
 /* GET Register page. */
 const baseUrl = '/';
 router.get(baseUrl + 'register', (req, res, next) => {
-  res.render('register', { title: 'Register' })
+  if(req.user){
+    res.render('register', { title: 'Register' })
+  } else {
+    res.redirect('/admin')
+  }
 });
 
 // POST Register Page

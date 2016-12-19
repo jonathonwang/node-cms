@@ -1,0 +1,25 @@
+.admin-navbar {
+  &.navbar {
+    background-color: #000;
+    border-radius: 0;
+    border-color: transparent;
+    min-height: 20px;
+    margin-bottom: 0;
+    height: 33px;
+
+    .navbar-brand {
+      font-size: 14px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    .navbar-nav {
+      li {
+        font-size: 14px;
+        a {
+          padding-top: 5px;
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+}
