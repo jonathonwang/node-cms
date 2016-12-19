@@ -1,5 +1,6 @@
 const User = require('../app/index').User;
 
+// Check User Auth
 const isUserAuth = (req, res, next) => {
   if(req.session.user_id) {
     User.findOne({ _id: req.session.user_id }, (err, FoundUser) => {

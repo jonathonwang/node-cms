@@ -5,6 +5,7 @@ const hbsHelpers = require('./config/hbs-helpers');
 const routes = require('./routes/index');
 const routesRegistrationHelper = require('./config/routes-helper');
 const mongoDbConnection = require('./config/db');
+const setupMiddleware = require('./middleware/index');
 const setupErrorHandling = require('./config/error-handling');
 
 // Authentication Middleware
@@ -18,7 +19,7 @@ const app = express();
 mongoDbConnection(app);
 // =============================================================================
 // View engine setup
-setupViewEngine(express, app);
+setupViewEngine(app, express);
 // =============================================================================
 // Register Handlebars Partials
 const partialsDirectories = [
@@ -29,8 +30,8 @@ hbsHelpers.registerHandlebarsPartials(partialsDirectories);
 // Register Handlebars Helpers
 hbsHelpers.registerHandlebarsHelpers();
 // =============================================================================
-// User Auth Middleware
-app.use((req, res, next) => isUserAuth(req, res, next));
+// Setup Middleware -- (must go before routes are registered)
+setupMiddleware(app);
 // =============================================================================
 // Setup App to Use Routes
 routesRegistrationHelper(app, routes);
