@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Import Needed Model
-const Post = require('../app/index').Post;
+const Post = require('../models/index').Post;
 
 
 const PostArray = [];

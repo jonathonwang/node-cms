@@ -1,4 +1,4 @@
-const User = require('../app/index').User;
+const User = require('../models/index').User;
 
 // Check User Auth
 const isUserAuth = (req, res, next) => {

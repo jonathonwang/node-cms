@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-const User = require('../app/index.js').User;
+const User = require('../models/index.js').User;
 
 // =============================================================================
 // ROUTES
 // GET home page
 const baseUrl = '/';
 router.get(baseUrl, (req, res, next) => {
+  // check to see if they were redirected from '/logout'
   if(req.query.logout) {
     res.render('login', {
       title: 'Login',
@@ -18,11 +19,11 @@ router.get(baseUrl, (req, res, next) => {
     res.render('login', { title: 'Login' });
   }
 });
-
 // POST Login User at route '/login'
 router.post(baseUrl, (req, res, next) => {
   attemptUserLogin(req, res);
 });
+
 // =============================================================================
 
 // =============================================================================
@@ -70,10 +71,7 @@ const loginFailed = (res, errorMessage) => {
 // Login Success Function =====
 const loginSuccess = (req, res, successMessage, FoundUser) => {
   req.session.user_id = FoundUser._id;
-  res.render('login', {
-    title: 'Login',
-    success: { message: successMessage }
-  });
+  res.redirect('/admin');
 }
 // End Login Post Route Functions
 // =============================================================================

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-const User = require('../app/index').User;
+const User = require('../models/index').User;
 
 /* GET Register page. */
 const baseUrl = '/';

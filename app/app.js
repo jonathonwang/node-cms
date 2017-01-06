@@ -1,5 +1,8 @@
 const express = require('express');
+const path = require('path');
 const colors = require('colors');
+
+// Configuration Imports
 const setupViewEngine = require('./config/view-engine');
 const hbsHelpers = require('./config/hbs-helpers');
 const routes = require('./routes/index');
@@ -8,23 +11,18 @@ const mongoDbConnection = require('./config/db');
 const setupMiddleware = require('./middleware/index');
 const setupErrorHandling = require('./config/error-handling');
 
-// Authentication Middleware
-const isUserAuth = require('./middleware/index').isUserAuth;
-
 // Express App
 const app = express();
 
 // =============================================================================
-// Connect to MongoDb
+// Connect to MongoDb + Setup Session
 mongoDbConnection(app);
 // =============================================================================
 // View engine setup
 setupViewEngine(app, express);
 // =============================================================================
 // Register Handlebars Partials
-const partialsDirectories = [
-  __dirname + '/views/partials'
-];
+const partialsDirectories = [ path.join(__dirname + '/views/partials') ];
 hbsHelpers.registerHandlebarsPartials(partialsDirectories);
 // =============================================================================
 // Register Handlebars Helpers
